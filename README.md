@@ -143,7 +143,7 @@ Copier le code
 python scripts/detect.py --input example_image.jpg --model models/airplane_detector.pt
 
 
-### References and Documentation
+## References and Documentation
 # Tutoriel utilisé :
  Getting Started with Roboflow : Ce tutoriel m'a aidé à structurer le projet, notamment pour la gestion des données et l'intégration des outils d'entraînement.
 # Autres outils et bibliothèques :
