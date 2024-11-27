@@ -16,7 +16,15 @@ Ce projet vise à développer un modèle personnalisé pour détecter les avions
 ### **Contexte :**
 Ce projet a été réalisé pour mon projet final de IMAGE UNDERSTANDING de l'Université Nationale de Kyungpook.Pour réaliser ce projet j'ai utilisé les bibliothèque OPENCV et Inference_sdk en suivant le tutoriel [Getting Started with Roboflow](https://blog.roboflow.com/getting-started-with-roboflow/), qui a fourni une base pour structurer le pipeline de préparation des données et d'entraînement. Le modèle a été entraîné avec un dataset personnalisé de plus de 250 images, collectées et annotées pour répondre spécifiquement aux exigences du projet.
 Le projet de Base etait d'avoir un programme qui permettrait de detecter un avion de transport afin de pouvoir le reconnaitre si il survolait une base militaire a l'aide d'un modèle de reconnaissance que j'aurais entrainer.
-pour ce faire, j'ai du entrainer, Grace a Roboflow Augmentations de données utilisées : rotation, recadrage, et variation de luminosité.
+pour ce faire, j'ai du entrainer, Grace a Roboflow, un modèle qui va reconnaitre des avions et qui seras entrainer a partir de leur propre IA et d'un modèle appelé COCO V3 ( que j'ai finalement décidé d'utiliser puisque YOLO V9 ne marchais pas sur mon ordinateur. 
+J'ai d'abord réaliser un première version qui lme servait de Test puis j'en ai develloper une nouvelle qui etait beaucoup plus devellopé puisqu'elle avait 200 photo de plus pour s'entrainer. 
+j'ai également ajouté plusieurs augmentations de données utilisées notamments des rotations, du recadrage, et des variation de luminosité afin d'avoir des image le plus potable possible.
+![image](https://github.com/user-attachments/assets/2ff38dd9-61e6-4ac2-8d01-c08a8cb7c81a)
+Ici on peut voir les differnetes versions et notamment la difference entre la Precision et le MaP
+
+Vous pouvez retrouvez mon modèle ( et l'essayer directement sur votre navigateur ) en cliquant sur ce lien ce lien :
+https://app.roboflow.com/benoit/plane-r9j7j/models
+
 
 
 
@@ -96,7 +104,7 @@ Installation des librairies :
 pip install openCV-python
 pip install inference_sdk
 ```
-![image](https://github.com/user-attachments/assets/2ff38dd9-61e6-4ac2-8d01-c08a8cb7c81a)
+
 
 Performance Metrics
 Mesures clés :
