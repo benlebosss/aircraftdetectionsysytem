@@ -83,6 +83,8 @@ cv2.destroyAllWindows()
 - Roboflow
 - OpenCV
 - Matplotlib
+python scripts/train.py --dataset data/train --epochs 50
+
 
 Installation des dépendances :
 ```bash
