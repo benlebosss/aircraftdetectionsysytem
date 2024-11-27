@@ -164,6 +164,101 @@ Améliorer les performances dans des conditions d'éclairage difficiles.
 Entraîner le modèle avec un dataset plus grand pour une meilleure généralisation.
 Intégrer une fonctionnalité de suivi d'objets pour des vidéos complexes.
 
+# **Custom Airplane Detection Model**
+
+## Project Results and Overview  
+This project aims to develop a custom model for detecting airplanes in images and videos. The main goal was to create a robust model capable of identifying airplanes with precision, using a custom dataset and modern training techniques.
+
+### **Primary Objectives :**
+- Develop a supervised learning model for airplane detection to aid in recognition and identification.  
+- Use a database of 300 reference images.  
+- Deploy the model to detect airplanes in real time or on recorded media.  
+
+### **Summary of Results :**
+- **Accuracy Achieved :** 90.9% on a validation dataset.  
+- **Performance :** Capable of detecting an airplane in less than 0.2 seconds per image.  
+- **Resource Usage :** Optimized to run on configurations with a GPU (e.g., NVIDIA RTX 3060) or even on CPU with slightly longer processing times.  
+
+### **Context :**
+This project was completed as part of my final project for IMAGE UNDERSTANDING at Kyungpook National University. To achieve this, I used the OPENCV and Inference_sdk libraries, following the tutorial [Getting Started with Roboflow](https://blog.roboflow.com/getting-started-with-roboflow/), which provided a foundation for structuring the data preparation and training pipeline.  
+The model was trained with a custom dataset of over 250 images, collected and annotated to meet the specific requirements of the project.  
+The initial goal was to create a program that could detect a transport airplane and recognize it if it flew over a military base, using a recognition model I would train.  
+To do this, I trained, using Roboflow, a model that recognizes airplanes and is trained with their AI and a model called COCO V3 (which I decided to use since YOLO V9 did not work on my computer).  
+I first created a prototype model for testing, and then I developed a new version with 200 more images for training.  
+I also added several data augmentations, including rotations, cropping, and brightness variations, to create the most usable images possible.  
+
+![image](https://github.com/user-attachments/assets/2ff38dd9-61e6-4ac2-8d01-c08a8cb7c81a)  
+Here, we can see the different versions and, notably, the difference between Precision and mAP.
+
+You can find my model (and try it directly on your browser) via this link:  
+https://app.roboflow.com/benoit/plane-r9j7j/models
+
+![image](https://github.com/user-attachments/assets/97dd451f-4c96-43b7-9f4b-758b03a76d56)
+
+
+
+
+
+
+
+## Source Code
+Le code source est organisé comme suit :
+```bash
+import cv2  // on importe OpenCV
+from inference_sdk import InferenceHTTPClient 
+
+# Initialiser le client avec l'URL et la clé API
+CLIENT = InferenceHTTPClient(
+    api_url="https://detect.roboflow.com",  
+    api_key="***************"     
+)
+
+# Définir le modèle à utiliser
+model_id = "airplanes-n1kvk/1"  
+
+# Initialiser la webcam
+cap = cv2.VideoCapture(0)  
+
+if not cap.isOpened():            
+    print("Erreur : Impossible d'accéder à la webcam.")   
+    exit()
+
+print("Appuyez sur 'q' pour quitter.")   
+
+while True:
+    # Lire une image de la webcam
+    ret, frame = cap.read()  
+    if not ret:
+        print("Erreur : Impossible de lire le flux de la webcam.")
+        break
+
+    # Afficher l'image capturée
+    cv2.imshow("Webcam - Appuyez sur 'q' pour quitter", frame) 
+
+    # Sauvegarder l'image temporairement pour l'envoi  
+    image_path = "temp_image.jpg"
+    cv2.imwrite(image_path, frame)
+
+    try:
+        # Envoyer l'image à l'API Roboflow
+        with open(image_path, "rb") as image_file:  
+            result = CLIENT.infer(image_file, model_id=model_id) 
+
+        # Afficher les résultats de détection
+        print("Résultat de la détection :")  
+        print(result)
+    except Exception as e:
+        print(f"Erreur : {e}") 
+
+    # Quitter la boucle si 'q' est pressé
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Libérer les ressources
+cap.release()
+cv2.destroyAllWindows()
+```
+
 # **맞춤형 항공기 탐지 모델**
 
 ## Project Results and Overview
