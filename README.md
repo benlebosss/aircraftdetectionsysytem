@@ -4,17 +4,19 @@
 Ce projet vise à développer un modèle personnalisé pour détecter les avions dans des images et des vidéos. L'objectif principal était de créer un modèle robuste capable d'identifier les avions avec précision, en utilisant un dataset personnalisé et des techniques d'entraînement modernes.
 
 ### **Objectifs principaux :**
-- Développer un modèle d’apprentissage supervisé pour la détection d'avions.
-- Utiliser une base de données de 600 images annotées manuellement.
+- Développer un modèle d’apprentissage supervisé pour la détection d'avions dans un but de reconnaissance et d'identification.
+- Utiliser une base de données de 300 image référence.
 - Déployer le modèle pour détecter des avions en temps réel ou sur des supports enregistrés.
 
 ### **Résumé des résultats :**
-- **Précision obtenue :** 89% sur un dataset de validation.  
+- **Précision obtenue :** 90.9% sur un dataset de validation.  
 - **Performance :** Capable de détecter un avion en moins de 0,2 seconde par image.  
 - **Utilisation des ressources :** Optimisé pour fonctionner sur des configurations avec GPU (par ex. NVIDIA RTX 3060) ou même en CPU avec des temps légèrement plus longs.  
 
 ### **Contexte :**
-Ce projet a été réalisé en suivant le tutoriel [Getting Started with Roboflow](https://blog.roboflow.com/getting-started-with-roboflow/), qui a fourni une base pour structurer le pipeline de préparation des données et d'entraînement. Le modèle a été entraîné avec un dataset personnalisé de plus de 250 images, collectées et annotées pour répondre spécifiquement aux exigences du projet.
+Ce projet a été réalisé pour mon projet final de IMAGE UNDERSTANDING de l'Université Nationale de Kyungpook.Pour réaliser ce projet j'ai utilisé les bibliothèque OPENCV et Inference_sdk en suivant le tutoriel [Getting Started with Roboflow](https://blog.roboflow.com/getting-started-with-roboflow/), qui a fourni une base pour structurer le pipeline de préparation des données et d'entraînement. Le modèle a été entraîné avec un dataset personnalisé de plus de 250 images, collectées et annotées pour répondre spécifiquement aux exigences du projet.
+Le projet de Base etait d'avoir un programme qui permettrait de detecter un avion de transport afin de pouvoir le reconnaitre si il survolait une base militaire a l'aide d'un modèle de reconnaissance que j'aurais entrainer.
+pour ce faire, j'ai du entrainer, Grace a Roboflow Augmentations de données utilisées : rotation, recadrage, et variation de luminosité.
 
 
 
@@ -136,14 +138,10 @@ python scripts/detect.py --input example_image.jpg --model models/airplane_detec
 # References and Documentation
 # Tutoriel utilisé :
 # Getting Started with Roboflow : Ce tutoriel m'a aidé à structurer le projet, notamment pour la gestion des données et l'intégration des outils d'entraînement.
-Autres outils et bibliothèques :
+# Autres outils et bibliothèques :
 Roboflow : Utilisé pour préparer et annoter les images.
 PyTorch : Framework principal pour entraîner le modèle.
 COCO Format : Format utilisé pour annoter les données.
-Détails techniques du modèle :
-Le modèle a été entraîné sur 600 images annotées manuellement.
-Augmentations de données utilisées : rotation, recadrage, et variation de luminosité.
-Issues and Contributions
 Problèmes connus :
 Les performances en environnement sombre sont limitées.
 Le modèle a du mal avec des angles de vue extrêmes.
