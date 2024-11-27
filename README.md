@@ -89,6 +89,11 @@ Installation des dépendances :
 ```bash
 pip install -r requirements.txt
 ```
+Installation des librairies :
+```bash
+pip install openCV-python
+pip install inference_sdk
+```
 ![image](https://github.com/user-attachments/assets/2ff38dd9-61e6-4ac2-8d01-c08a8cb7c81a)
 
 Performance Metrics
