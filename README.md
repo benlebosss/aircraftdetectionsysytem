@@ -20,7 +20,7 @@ Ce projet a été réalisé en suivant le tutoriel [Getting Started with Roboflo
 
 ## Source Code
 Le code source est organisé comme suit :
-bash
+```bash
 import cv2  // on importe OpenCV
 from inference_sdk import InferenceHTTPClient  // on importe la bibliotheque de gestion de ROBOFLOW
 
