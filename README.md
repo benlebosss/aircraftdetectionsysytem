@@ -25,6 +25,11 @@ Ici on peut voir les differnetes versions et notamment la difference entre la Pr
 Vous pouvez retrouvez mon modèle ( et l'essayer directement sur votre navigateur ) en cliquant sur ce lien ce lien :
 https://app.roboflow.com/benoit/plane-r9j7j/models
 
+![image](https://github.com/user-attachments/assets/97dd451f-4c96-43b7-9f4b-758b03a76d56)
+
+
+
+
 
 
 
@@ -150,13 +155,13 @@ python scripts/detect.py --input example_image.jpg --model models/airplane_detec
 Roboflow : Utilisé pour préparer et annoter les images.
 PyTorch : Framework principal pour entraîner le modèle.
 COCO Format : Format utilisé pour annoter les données.
-Problèmes connus :
+## Problèmes connus :
 Les performances en environnement sombre sont limitées.
 Le modèle a du mal avec des angles de vue extrêmes.
+le modèle detecte tout type d'avion mais ne peut pas les différencier ( j'avais deja essayer avec un premier projet mais les resultat était peu concluant)
 Contribuer :
 Pour signaler un bug ou proposer une amélioration, ouvre une issue ou soumets une pull request sur le dépôt GitHub.
 
-Future Work
 Améliorer les performances dans des conditions d'éclairage difficiles.
 Entraîner le modèle avec un dataset plus grand pour une meilleure généralisation.
 Intégrer une fonctionnalité de suivi d'objets pour des vidéos complexes.
