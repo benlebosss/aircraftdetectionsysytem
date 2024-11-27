@@ -14,24 +14,66 @@ Ce projet vise à développer un modèle personnalisé pour détecter les avions
 - **Utilisation des ressources :** Optimisé pour fonctionner sur des configurations avec GPU (par ex. NVIDIA RTX 3060) ou même en CPU avec des temps légèrement plus longs.  
 
 ### **Contexte :**
-Ce projet a été réalisé en suivant le tutoriel [Getting Started with Roboflow](https://blog.roboflow.com/getting-started-with-roboflow/), qui a fourni une base pour structurer le pipeline de préparation des données et d'entraînement. Le modèle a été entraîné avec un dataset personnalisé de 600 images, collectées et annotées pour répondre spécifiquement aux exigences du projet.
+Ce projet a été réalisé en suivant le tutoriel [Getting Started with Roboflow](https://blog.roboflow.com/getting-started-with-roboflow/), qui a fourni une base pour structurer le pipeline de préparation des données et d'entraînement. Le modèle a été entraîné avec un dataset personnalisé de plus de 250 images, collectées et annotées pour répondre spécifiquement aux exigences du projet.
 
----
+
 
 ## Source Code
 Le code source est organisé comme suit :
-# project-directory/ │ ├── data/ 
-# Dataset et annotations │ ├── train/ 
-# Images d'entraînement │ ├── val/ 
-# Images de validation │ ├── models/ 
-# Modèles enregistrés et configurations │ ├── airplane_detector.pt 
-# Modèle final │ ├── scripts/ 
-# Scripts Python pour le projet │ ├── train.py 
-# Script d'entraînement │ ├── detect.py 
-# Script de détection │ ├── requirements.txt 
-# Dépendances Python ├── README.md 
-# Documentation principale
+bash
+import cv2  // on importe OpenCV
+from inference_sdk import InferenceHTTPClient  // on importe la bibliotheque de gestion de ROBOFLOW
 
+# Initialiser le client avec l'URL et la clé API
+CLIENT = InferenceHTTPClient(
+    api_url="https://detect.roboflow.com", // grace a la bibliotheque de roboflow on recupere la l'api que l'on a en tant que membres 
+    api_key="***************"    // ma clef personelle de l'API 
+)
+
+# Définir le modèle à utiliser
+model_id = "airplanes-n1kvk/1" // ici on recupere mon modele ( celui que j'ai entrainer 
+
+# Initialiser la webcam
+cap = cv2.VideoCapture(0)  // 0 correspond à la webcam par défaut
+
+if not cap.isOpened():          // pour respecter le projet j'utilise pour l'instant la cwebcam de mon PC sachant que l'objectif serait d'avoir une camera exterieur pointer vers le ciel avec un fish eye pour avoir un meilleur angle de vision 
+    print("Erreur : Impossible d'accéder à la webcam.")   // explication de l'erreur si on arrive pas a acceder a la webcam 
+    exit()
+
+print("Appuyez sur 'q' pour quitter.")  //touche pour quitter le programme 
+
+while True:
+    # Lire une image de la webcam
+    ret, frame = cap.read()  //lecture de la webcam 
+    if not ret:
+        print("Erreur : Impossible de lire le flux de la webcam.")// erreur si on arrive a acceder a la webcam mais pas a recuperer les données j'ai ajouter cette commande pour voir si ma camera marchais bien)
+        break
+
+    # Afficher l'image capturée
+    cv2.imshow("Webcam - Appuyez sur 'q' pour quitter", frame) // renvoie l'image obtenue grace a la webcam 
+
+    # Sauvegarder l'image temporairement pour l'envoi  
+    image_path = "temp_image.jpg"
+    cv2.imwrite(image_path, frame)
+
+    try:
+        # Envoyer l'image à l'API Roboflow
+        with open(image_path, "rb") as image_file:  // envoyer l'image a l'API de Roboflow 
+            result = CLIENT.infer(image_file, model_id=model_id) 
+
+        # Afficher les résultats de détection
+        print("Résultat de la détection :") //affichage du resultat 
+        print(result)
+    except Exception as e:
+        print(f"Erreur : {e}") 
+
+    # Quitter la boucle si 'q' est pressé
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Libérer les ressources
+cap.release()
+cv2.destroyAllWindows()
 
 
 
