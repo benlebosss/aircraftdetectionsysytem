@@ -74,7 +74,7 @@ while True:
 # Libérer les ressources
 cap.release()
 cv2.destroyAllWindows()
-///
+```
 
 
 ### **Dépendances nécessaires :**
