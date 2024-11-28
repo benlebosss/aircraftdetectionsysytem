@@ -118,7 +118,8 @@ Précision (mAP)	89%
 Temps de traitement	0.18 secondes/image
 Consommation mémoire	~2.3 GB (GPU NVIDIA)
 Graphique de l'évolution de la précision :
-Inclure un graphique (optionnel, si disponible) montrant l'évolution de la perte ou de la précision pendant l'entraînement.
+![image](https://github.com/user-attachments/assets/5329432e-bd6c-4648-928a-dd9f1861af91)
+
 
 Installation and Usage
 Installation :
@@ -202,7 +203,7 @@ https://app.roboflow.com/benoit/plane-r9j7j/models
 
 
 ## Source Code
-Le code source est organisé comme suit :
+the source code is build like this:
 ```bash
 import cv2  // on importe OpenCV
 from inference_sdk import InferenceHTTPClient 
@@ -258,6 +259,74 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 ```
+
+### **necessaries librairies :**
+- Python 3.8+
+- PyTorch >= 1.9
+- Roboflow
+- OpenCV
+- Matplotlib
+
+
+Installation :
+```bash
+pip install -r requirements.txt
+```
+Installation des librairies :
+```bash
+pip install openCV-python
+pip install inference_sdk
+```
+
+
+Performance Metrics
+Précision (mAP)	90.8%
+Time	0.18 sec/image
+memory comsomation	~2.3 GB (GPU NVIDIA)
+evolution:
+![image](https://github.com/user-attachments/assets/ab4bd86c-c282-4894-8533-557e6be6089b)
+
+
+Installation and Usage
+Installation :
+clone the project :
+
+bash
+git clone https://github.com/username/custom-airplane-detector.git
+cd custom-airplane-detector
+
+bash
+pip install -r requirements.txt
+Configurethee dataset by following the instruction data/README.md.
+
+Utilisation :
+Pour entraîner le modèle :
+
+bash
+Copy the code 
+python scripts/train.py --dataset data/train --epochs 50
+Pour effectuer une détection :
+
+bash
+Copier le code
+python scripts/detect.py --input example_image.jpg --model models/airplane_detector.pt
+
+
+# References and Documentation
+## Tutorial used :
+ Getting Started with Roboflow : Ce tutoriel m'a aidé à structurer le projet, notamment pour la gestion des données et l'intégration des outils d'entraînement. this tutorial helped me tp structure the project, specially for the data utilisation and for the integration of the training tools.
+## Other tools and library :
+Roboflow : Used for préparation and annotation of the images.
+PyTorch : Framework principal pour entraîner le modèle.
+COCO Format : Format utilisé pour annoter les données.
+## Problèmes connus :
+Les performances en environnement sombre sont limitées.
+Le modèle a du mal avec des angles de vue extrêmes.
+le modèle detecte tout type d'avion mais ne peut pas les différencier (j'avais deja essayer avec un premier projet mais les resultat était peu concluant)
+## Point a Ameliorer : 
+Améliorer les performances dans des conditions d'éclairage difficiles.
+Entraîner le modèle avec un dataset plus grand pour une meilleure généralisation.
+Intégrer une fonctionnalité de suivi d'objets pour des vidéos complexes.
 
 # **맞춤형 항공기 탐지 모델**
 
@@ -344,4 +413,5 @@ while True:
 # 리소스 해제
 cap.release()
 cv2.destroyAllWindows()
+![image](https://github.com/user-attachments/assets/d716ebb0-4f58-4fd6-ae1a-c2f113a20291)
 
