@@ -280,7 +280,7 @@ pip install inference_sdk
 
 
 Performance Metrics
-Précision (mAP)	90.8%
+Precision (mAP)	90.8%
 Time	0.18 sec/image
 memory comsomation	~2.3 GB (GPU NVIDIA)
 evolution:
@@ -300,50 +300,50 @@ pip install -r requirements.txt
 Configurethee dataset by following the instruction data/README.md.
 
 Utilisation :
-Pour entraîner le modèle :
+to train the modele :
 
 bash
 Copy the code 
 python scripts/train.py --dataset data/train --epochs 50
-Pour effectuer une détection :
+Pour do a detection :
 
 bash
-Copier le code
+copy the code
 python scripts/detect.py --input example_image.jpg --model models/airplane_detector.pt
 
 
 # References and Documentation
 ## Tutorial used :
- Getting Started with Roboflow : Ce tutoriel m'a aidé à structurer le projet, notamment pour la gestion des données et l'intégration des outils d'entraînement. this tutorial helped me tp structure the project, specially for the data utilisation and for the integration of the training tools.
+ Getting Started with Roboflow :this tutorial helped me tp structure the project, specially for the data utilisation and for the integration of the training tools.
 ## Other tools and library :
-Roboflow : Used for préparation and annotation of the images.
-PyTorch : Framework principal pour entraîner le modèle.
-COCO Format : Format utilisé pour annoter les données.
-## Problèmes connus :
-Les performances en environnement sombre sont limitées.
-Le modèle a du mal avec des angles de vue extrêmes.
-le modèle detecte tout type d'avion mais ne peut pas les différencier (j'avais deja essayer avec un premier projet mais les resultat était peu concluant)
-## Point a Ameliorer : 
-Améliorer les performances dans des conditions d'éclairage difficiles.
-Entraîner le modèle avec un dataset plus grand pour une meilleure généralisation.
-Intégrer une fonctionnalité de suivi d'objets pour des vidéos complexes.
+Roboflow : Used for preparation and annotation of the images.
+PyTorch : principal Framework to use the model.
+COCO Format : Format used to write the data.
+## Known Issues:
+- Performance is limited in dark environments.
+- The model struggles with extreme viewing angles.
+- The model detects all types of airplanes but cannot differentiate between them (I had already tried this with a previous project, but the results were inconclusive).
 
+## Areas for Improvement:
+- Enhance performance in challenging lighting conditions.
+- Train the model with a larger dataset for better generalization.
+- Integrate an object-tracking feature for complex videos.
 # **맞춤형 항공기 탐지 모델**
 
 ## Project Results and Overview
 이 프로젝트는 이미지와 영상에서 항공기를 탐지하기 위한 맞춤형 모델을 개발하는 것을 목표로 합니다. 주요 목표는 정확하게 항공기를 탐지할 수 있는 강력한 모델을 제작하는 것으로, 맞춤형 데이터셋과 최신 학습 기법을 활용했습니다.
 
-### **Objectifs principaux :**
+### **principals objective :**
 - 항공기 탐지 및 인식을 위한 지도 학습 모델 개발.  
 - 300장의 참조 이미지를 포함한 데이터베이스 활용.  
 - 실시간 또는 녹화된 자료에서 항공기를 탐지할 수 있도록 모델 배포.  
 
-### **Résumé des résultats :**
+### **Résume of the results :**
 - **얻어진 정확도 :** 검증 데이터셋에서 90.9%.  
 - **성능 :** 이미지 한 장당 0.2초 이내에 항공기 탐지 가능.  
 - **자원 활용 :** NVIDIA RTX 3060과 같은 GPU 구성에서 최적화되었으며, CPU에서도 약간 더 긴 처리 시간으로 동작 가능.  
 
-### **Contexte :**
+### **Context :**
 이 프로젝트는 경북대학교의 IMAGE UNDERSTANDING 최종 프로젝트로 진행되었습니다. 이 프로젝트를 위해 OPENCV와 Inference_sdk 라이브러리를 활용했으며, 데이터 준비와 학습 파이프라인 구조화를 위해 [Getting Started with Roboflow](https://blog.roboflow.com/getting-started-with-roboflow/) 튜토리얼을 참고했습니다.  
 이 모델은 250장이 넘는 맞춤형 이미지 데이터셋으로 학습되었으며, 항공기 탐지 및 인식을 위한 요구 사항에 맞게 수집 및 주석 처리되었습니다.  
 
@@ -414,4 +414,14 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 ![image](https://github.com/user-attachments/assets/d716ebb0-4f58-4fd6-ae1a-c2f113a20291)
+
+## 알려진 문제점:  
+- 어두운 환경에서 성능이 제한됩니다.  
+- 모델이 극단적인 시야각에서 어려움을 겪습니다.  
+- 모델이 모든 유형의 비행기를 감지하지만, 이를 구분하지는 못합니다 (이전에 시도했던 프로젝트에서도 결과가 만족스럽지 않았습니다).  
+
+## 개선할 점:  
+- 어려운 조명 조건에서의 성능을 향상시키기.  
+- 더 큰 데이터셋으로 모델을 학습시켜 일반화를 개선하기.  
+- 복잡한 영상에서 객체 추적 기능을 통합하기.  
 
